@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 const fs = require("fs");
 
 const svgRegex = new RegExp("<svg.+?>(.*?)<\/svg>", "mis")
@@ -9,29 +10,32 @@ if (process.argv[2]) {
   specificFileToRead = process.argv[2]
 }
 
+console.log("############### starting to convert files ###############")
 if (specificFileToRead) {
+  console.log(`converting: ${specificFileToRead}`)
   createVueFile(specificFileToRead)
 } else {
-  const files = fs.readdirSync(__dirname)
-  console.log(files)
+  const files = fs.readdirSync(process.cwd())
   files.forEach(file => {
     if (file.endsWith(".svg")) {
+      console.log(`converting: ${file}`)
       createVueFile(file)
     }
   })
 }
+console.log("############### done converting files ###############")
 
 function createVueFile(filePath) {
   const fileString = getFileString(filePath);
-  let svgContent = "no content recognized";
   const match = fileString.match(svgRegex)
   if (match.length && match[1]) {
-    svgContent = match[1]
+    const svgContent = match[1]
+    const vueFileContent = scaffold.replace(replaceKey, svgContent);
+    const vueFilePath = getVueFilePath(filePath);
+    writeVueFile(vueFilePath, vueFileContent)
+  } else {
+    console.log(`--> file has no svg content`)
   }
-
-  const vueFileContent = scaffold.replace(replaceKey, svgContent);
-  const vueFilePath = getVueFilePath(filePath);
-  writeVueFile(vueFilePath, vueFileContent)
 }
 
 function getVueFilePath(filePath) {
