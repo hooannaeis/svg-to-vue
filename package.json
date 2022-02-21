@@ -1,0 +1,23 @@
+{
+  "name": "svg-to-vue",
+  "version": "1.0.0",
+  "description": "turns an svg file into a vue component",
+  "main": "src/index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hooannaeis/svg-to-vue.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hooannaeis/svg-to-vue/issues"
+  },
+  "homepage": "https://github.com/hooannaeis/svg-to-vue#readme"
+}
